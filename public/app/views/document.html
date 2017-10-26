@@ -1,0 +1,56 @@
+<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+    <h1>Control de documentos</h1>
+    <section class="row text-center placeholders">
+
+
+    </section>
+    <div ng-show="docu.formFail" class="alert alert-danger" role="alert">
+        Hubo un problema al procesar los datos
+    </div>
+    <form id="docu.formCheck" name="docu.formCheck">
+        <div class="form-group">
+            <label for="folio">Folio</label>
+            <input type="number" required class="form-control" id="folio" ng-model="docu.form.folio">
+        </div>
+        <div class="form-group">
+            <label for="nomc">Nombre del comprador</label>
+            <input type="text" required class="form-control" id="nombc" ng-model="docu.form.nombre_comprador">
+        </div>
+
+       
+        <div ng-repeat='detalle in docu.form.detalles  track by $index'>
+            <p class="lead">Nueva linea #{{$index+1}} </p>
+            <div class="form-group">
+                <label for="unidad_med">Unidad de medida</label>
+                <select class="form-control" required id="unidad_med" ng-model="detalle.unidad_medida">
+        <option value="kg">Kilogramo</option>
+        <option value="ml">Mililitro</option>
+        <option value="mg">Miligramo</option>
+        <option value="g">Gramo</option>
+        <option value="l">Litro</option>
+      </select>
+            </div>
+            <div class="form-group">
+                <label for="recio">Precio</label>
+                <input type="number" placeholder="0.00" step="any" ng-change="detalle.subtotal = detalle.precio*detalle.cantidad"  required class="form-control" id="precio" ng-model="detalle.precio">
+            </div>
+            <div class="form-group">
+                <label for="cant">Cantidad</label>
+                <input type="number" required class="form-control"  ng-change="detalle.subtotal = detalle.precio*detalle.cantidad"  id="cant" ng-model="detalle.cantidad">
+            </div>
+            <div class="form-group">
+                <label for="desc">Descripción</label>
+                <input type="text" required class="form-control" id="desc" ng-model="detalle.descripcion">
+            </div>
+            <div class="form-group">
+                <label for="subtot">Subtotal</label>
+                <input type="text"  value="{{detalle.precio*detalle.cantidad}}"  readonly placeholder="0.00"  class="form-control" id="subtot" ng-model="detalle.subtotal">
+            </div>
+            <div class="dropdown-divider"></div>
+        </div>
+        <p><button class="btn btn-lg btn-success" ng-click="docu.addLinea()" role="button" type="button">Añadir linea de detalle</button></p>
+        <button type="submit" class="btn btn-primary" ng-click="docu.submitForm($event)">Enviar</button>
+        <a class="btn btn-primary" href="#/documents">Regresar</a>
+    </form>
+
+</main>

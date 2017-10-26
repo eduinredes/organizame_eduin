@@ -1,0 +1,11 @@
+{
+  "PORT": 8090,
+  "mysql": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "organizame",
+    "connectionLimit": 100,
+    "debug": false
+  }
+}

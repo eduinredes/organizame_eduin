@@ -1,0 +1,40 @@
+<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+    <h1>Control de documentos</h1>
+    <section class="row text-center placeholders">
+        <div class="col-6 col-sm-3 placeholder">
+            <a  class="btn btn-primary" role="button" href="#/document_form">Nuevo Documento</a>
+        </div>
+
+    </section>
+    <h2>Listado de documentos </h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Folio</th>
+                    <th scope="col">Nombre del comprador</th>
+                    <th scope="col">Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-if="documentsCrud.documents.length  < 1">
+                    <td> No hay datos </td>
+                </tr>
+                <tr ng-repeat="document in documentsCrud.documents track by $index">
+                    <th scope="row">{{$index}}</th>
+                    <td>{{document.fecha}}</td>
+                    <td>{{document.folio}}</td>
+                    <td>{{document.nombre_comprador}}</td>
+                    <td>{{document.total}}</td>
+                    <td><a class="btn btn-info btn-sm" role="button" ng-href="#/document_form/{{document.documento_id}}">Editar</a>
+                    <button class="btn btn-info btn-sm" role="button" ng-click="documentsCrud.deleteDoc(document.documento_id)">Eliminar</button>
+                    <button class="btn btn-info btn-sm" role="button" ng-click="documentsCrud.print(document.documento_id)">Imprimir</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
